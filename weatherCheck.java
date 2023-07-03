@@ -8,7 +8,7 @@ class weatherCheck{
     }
     public void createConection (String city) throws IOException{
         
-        String urlApi =  "http://api.weatherapi.com/v1/current.json?key=682aaa6b30334ea0b46102458230107&q=" + city;
+        String urlApi = "http://api.weatherapi.com/v1/current.json?key=682aaa6b30334ea0b46102458230107&q=" + city;
        
         URL url = new URL(urlApi);//creating the URL object
         HttpURLConnection http = (HttpURLConnection)url.openConnection();//establishing the conection between the program and the api website
@@ -17,8 +17,6 @@ class weatherCheck{
           BufferedReader bf = new BufferedReader( new InputStreamReader(http.getInputStream()));
           String weatherJson = bf.readLine();
           dataProcessor(weatherJson);
-
-        
         }
        
     }
@@ -36,8 +34,13 @@ class weatherCheck{
         ind1 = data.indexOf("condition")+20;
         ind2 = data.indexOf("icon")-3;
         String cond = data.substring(ind1, ind2);
+        
 
-        System.out.println(temp+"   \n"+cond );
+        System.out.println("Temperature: "+temp+ "C" );
+        System.out.println("Condition: " +cond);
+        if(temp==""){
+            System.out.println("Invalid city");
+        }
         
     }
 
